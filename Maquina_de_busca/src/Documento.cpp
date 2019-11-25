@@ -70,6 +70,10 @@ bool Documento::operator>(Documento d) const{
     return (nome_>d.nome_);
 }
 
+bool Documento::operator<(Documento d) const{
+    return (!(nome_>d.nome_)&&!(nome_==d.nome_));
+}
+
 void Documento::operator=(Documento d){
     nome_=d.nome_;
     frequencias_=d.frequencias_;

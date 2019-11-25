@@ -31,7 +31,10 @@ class Documento{
         bool operator==(Documento d) const;
 
         //Retorna se o nome do documento vem antes do nome do documento d em ordem lexicográfica
-        bool operator>(Documento d) const;
+        bool operator>(Documento d) const;        
+
+        //Retorna se o nome do documento vem depois do nome do documento d em ordem lexicográfica
+        bool operator<(Documento d) const;
 
         //Iguala os atributos do documento aos atributos de d.
         void operator=(Documento d);

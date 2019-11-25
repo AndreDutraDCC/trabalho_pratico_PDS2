@@ -6,21 +6,20 @@
 #include "Busca.h"
 
 int main(){
-    string pasta,consulta;
+    string dir,consulta;
     
-    cout<<"Insira o nome da pasta de onde os arquivos serao lidos."<<endl;
-    cout<<"Certifique-se de que a mesma esta dentro da pasta do projeto."<<endl;
-    cin>>pasta;
+    cout<<"Insira o diretorio completo de onde os arquivos serao lidos."<<endl;
+    cin>>dir;
     cout<<"O que deseja pesquisar?"<<endl;
     cin>>consulta;
     
-    IndiceInvertido I("arquivos");
+    IndiceInvertido I(dir);
     Busca b("A B",I);
     multimap<double,string> resultado=b.Cosine_rank();
-    it=resultado.rbegin();
+    auto it=resultado.rbegin();
     double cos_anterior,cos_atual;
     cos_atual=it->first;
-    i=1;
+    int i=1;
     cout<<"Os documentos mais proximos da sua consulta sao:"<<endl;
     cout<<i<<"    "<<cos_atual;
     it++;

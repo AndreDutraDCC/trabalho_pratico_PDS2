@@ -17,7 +17,7 @@ Busca::Busca(string consulta, IndiceInvertido dados){
 	arq_consulta<<consulta;
 	arq_consulta.close();
 
-	Documento d("consulta_","consulta.txt");
+	Documento d("consulta_",dir);
 	consulta_= d;
 	remove(dir.c_str());
 }

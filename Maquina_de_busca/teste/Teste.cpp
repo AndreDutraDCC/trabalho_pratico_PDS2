@@ -308,7 +308,7 @@ TEST_SUITE("Indice_invertido.h"){
 
         for(string& k: u){
             CHECK(Teste::indice(I1)[k]==Teste::indice(I2)[k]);
-            }
+            
         }
     }
 

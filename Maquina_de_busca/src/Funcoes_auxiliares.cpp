@@ -38,7 +38,7 @@ double FuncoesAuxiliares::cosseno_vetorial(vector<double> v1, vector<double> v2)
 }
 
 string FuncoesAuxiliares::obter_diretorio_atual(){
-    fs::path p=std::experimental::filesystem::current_path();
+    std::experimental::filesystem::path p=std::experimental::filesystem::current_path();
     string dir=p.string();
     return dir;
 }

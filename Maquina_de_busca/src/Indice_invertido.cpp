@@ -22,12 +22,12 @@ IndiceInvertido::IndiceInvertido(string diretorio){
     for(Documento& doc : docs_){
         for(string& palavra : doc.conteudo()){
             if(indice_.find(palavra)==indice_.end()){
-                set<Documento> s;
-                s.insert(doc);
+                set<string> s;
+                s.insert(doc.nome());
                 indice_.emplace(palavra,s);
             }
             else{
-                indice_[palavra].insert(doc);
+                indice_[palavra].insert(doc.nome());
             }
         }
     }
@@ -46,8 +46,8 @@ bool IndiceInvertido::presente(string palavra, string nome){
     if(indice_.find(palavra)==indice_.end()){
         return false;
     }
-    for(Documento d:indice_[palavra]){
-        if(d.nome()==nome){
+    for(string s:indice_[palavra]){
+        if(s==nome){
             return true;
         }
     }

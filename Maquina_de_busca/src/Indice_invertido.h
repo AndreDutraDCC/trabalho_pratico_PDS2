@@ -38,8 +38,8 @@ class IndiceInvertido{
 
         friend class Teste;
     private:
-        //Guarda o indice invertido, associando cada palavra a um conjunto de documentos em que a palavra está presente.
-        map<string,set<Documento>> indice_;
+        //Guarda o indice invertido, associando cada palavra a um conjunto de nomes de documentos em que a palavra está presente.
+        map<string,set<string>> indice_;
         
         //Guarda a quantidade de palavras no índice invertido.
         int tamanho_;

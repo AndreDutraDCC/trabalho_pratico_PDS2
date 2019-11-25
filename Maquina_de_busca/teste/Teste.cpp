@@ -29,7 +29,7 @@ class Teste{
             return d.frequencias_;
         }
 
-        static map<string,set<Documento>> indice(const IndiceInvertido& i){
+        static map<string,set<string>> indice(const IndiceInvertido& i){
             return i.indice_;
         }
         
@@ -228,24 +228,24 @@ TEST_SUITE("Indice_invertido.h"){
         CHECK(Teste::tamanho(I)==5);
         CHECK(Teste::docs(I)==v);
 
-        Documento dp1[]={teste1};
-        set<Documento> valores1(dp1,dp1+1);
+        string dp1[]={"teste1"};
+        set<string> valores1(dp1,dp1+1);
         m.emplace("carrapatoestrela",valores1);
         
-        Documento dp2[]={teste1,teste2};
-        set<Documento> valores2(dp2,dp2+2);
+        string dp2[]={"teste1","teste2"};
+        set<string> valores2(dp2,dp2+2);
         m.emplace("lagoa",valores2);
         
-        Documento dp3[]={teste1,teste2,teste3};
-        set<Documento> valores3(dp3,dp3+3);
+        string dp3[]={"teste1","teste2","teste3"};
+        set<string> valores3(dp3,dp3+3);
         m.emplace("pato",valores3);
         
-        Documento dp4[]={teste2,teste3};
-        set<Documento> valores4(dp4,dp4+2);
+        string dp4[]={"teste2","teste3"};
+        set<string> valores4(dp4,dp4+2);
         m.emplace("rio",valores4);
         
-        Documento dp5[]={teste3};
-        set<Documento> valores5(dp5,dp5+1);
+        string dp5[]={"teste3"};
+        set<string> valores5(dp5,dp5+1);
         m.emplace("palito",valores5);
         
         for(string& k: u){
@@ -337,7 +337,7 @@ TEST_SUITE("Busca.h"){
 
         bool encontrardoc=false;
 
-        for(string& k: u){
+        for(string & k: u){
             CHECK(Teste::indice(I)[k]==Teste::indice(Teste::dados(b))[k]);
         }
     }

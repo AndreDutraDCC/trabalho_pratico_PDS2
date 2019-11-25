@@ -23,9 +23,10 @@ Documento::Documento(string nome, string diretorio){
     char c;
     string palavra;
     FuncoesAuxiliares f;
+    arquivo>>noskipws;
     while(arquivo.good()){
         arquivo>>c;
-        if((((c==' ')||(c=='\n')||(c=='\0'))||arquivo.eof())&&(palavra!="")){
+        if((((c==' ')||(c=='\n')||(c=='\0'))||arquivo.eof())&&(f.padronizar_string(palavra)!="")){
             palavra=f.padronizar_string(palavra);
             if(frequencias_.find(palavra)==frequencias_.end()){
                 frequencias_[palavra]=1;
@@ -72,8 +73,4 @@ bool Documento::operator>(Documento d) const{
 void Documento::operator=(Documento d){
     nome_=d.nome_;
     frequencias_=d.frequencias_;
-}
-
-int main(){
-    return 0;
 }

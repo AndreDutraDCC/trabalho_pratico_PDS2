@@ -14,9 +14,9 @@ class IndiceInvertido{
         //Cria um índice invertido vazio.
         IndiceInvertido();
         
-        //Cria um índice invertido a partir do nome da pasta em que os arquivos estão
-        //PRECONDIÇÃO: a pasta existe e está dentro da pasta do workspace
-        IndiceInvertido(string pasta);
+        //Cria um índice invertido a partir do diretorio em que os arquivos estão
+        //PRECONDIÇÃO: o diretorio existe
+        IndiceInvertido(string diretorio);
         
         //Retorna a quantidade de palavras diferentes no índice invertido formado
         int tamanho();

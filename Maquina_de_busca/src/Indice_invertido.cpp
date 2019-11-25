@@ -1,6 +1,6 @@
 #include "Indice_invertido.h"
 #include "Funcoes_auxiliares.h"
-#include<cmath>
+#include <cmath>
 
 using namespace std;
 
@@ -10,18 +10,25 @@ IndiceInvertido::IndiceInvertido(){
     indice_.clear();
 }
 
-IndiceInvertido::IndiceInvertido(string pasta){
+IndiceInvertido::IndiceInvertido(string diretorio){
     FuncoesAuxiliares f;
-    vector<string> documentos=f.obter_arquivos_em(pasta);
+    vector<string> documentos=f.obter_arquivos_em(diretorio);
     docs_.clear();
     indice_.clear();
-    for(auto it=documentos.begin();it!=documentos.end();it++){
-        Documento d(*it,(f.obter_diretorio_atual()+"\\"+pasta+"\\"+*it));
+    for(string arquivo : documentos){
+        Documento d(arquivo,(diretorio+"/"+arquivo));
         docs_.push_back(d);
     }
-    for(auto it1=docs_.begin();it1!=docs_.end();it1++){
-        for(auto it2=it1->conteudo().begin();it2!=it1->conteudo().end();it2++){
-            indice_[*it2].insert(&(*it1));
+    for(Documento& doc : docs_){
+        for(string& palavra : doc.conteudo()){
+            if(indice_.find(palavra)==indice_.end()){
+                set<Documento*> s;
+                s.insert(&(doc));
+                indice_.emplace(palavra,s);
+            }
+            else{
+                indice_[palavra].insert(&(doc));
+            }
         }
     }
     tamanho_=indice_.size();
@@ -30,7 +37,7 @@ IndiceInvertido::IndiceInvertido(string pasta){
 int IndiceInvertido::tamanho(){
     return tamanho_;
 }
-        
+
 vector<Documento> IndiceInvertido::documentos(){
     return docs_;
 }
@@ -40,7 +47,7 @@ bool IndiceInvertido::presente(string palavra, string nome){
         return false;
     }
     for(auto it=indice_.find(palavra)->second.begin();it!=indice_.find(palavra)->second.end();it++){
-        if((**it).nome()==nome){
+        if((*it)->nome()==nome){
             return true;
         }
     }
@@ -76,8 +83,4 @@ void IndiceInvertido::operator=(IndiceInvertido indice2){
     for(auto it=indice2.indice_.begin();it!=indice2.indice_.end();it++){
         indice_[it->first]=it->second;
     }
-}
-
-int main(){
-    return 0;
 }

@@ -9,16 +9,17 @@
 using namespace std;
 
 Busca::Busca(string consulta, IndiceInvertido dados){
+	FuncoesAuxiliares a;
+	string dir=a.obter_diretorio_atual()+"/consulta.txt";
 	dados_= dados;
-	ofstream arq_consulta;
+	ofstream arq_consulta(dir);
 
-	arq_consulta.open("consulta.txt");
 	arq_consulta<<consulta;
 	arq_consulta.close();
 
 	Documento d("consulta_","consulta.txt");
 	consulta_= d;
-	remove("consulta.txt");
+	remove(dir.c_str());
 }
 
 vector<double> Busca::Vetorizar(const Documento& doc){
@@ -26,11 +27,10 @@ vector<double> Busca::Vetorizar(const Documento& doc){
 	double importancia;
 	vector<double> v;
 	
-	for (auto it=dados_.palavras().begin();it!=dados_.palavras().end();it++)
-	{
-		frequencia = doc.quantas(*it);
-		importancia = dados_.idf(*it);
-		v.push_back(frequencia * importancia);
+	for (string palavra : dados_.palavras()){
+		frequencia = doc.quantas(palavra);
+		importancia = dados_.idf(palavra);
+		v.push_back((frequencia * importancia));
 	}
 	return v;
 }
@@ -56,8 +56,4 @@ multimap<double,string> Busca::Cosine_rank(){
 	}
 
 	return cos_para_nome;
-}
-
-int main(){
-	return 0;
 }

@@ -16,19 +16,19 @@ teste: bin/teste
 	./bin/teste
 
 bin/Funcoes_auxiliares.o: src/Funcoes_auxiliares.cpp
-	$(CXX) $(CXX_FLAGS) -I src/ $^ -o $@
+	$(CXX) $(CXX_FLAGS) -c -I src/ $^ -o $@
 
 bin/Documento.o: src/Documento.cpp
-	$(CXX) $(CXX_FLAGS) -I src/ $^ -o $@
+	$(CXX) $(CXX_FLAGS) -c -I src/ $^ -o $@
 
 bin/Indice_invertido.o: src/Indice_invertido.cpp
-	$(CXX) $(CXX_FLAGS) -I src/ $^ -o $@
+	$(CXX) $(CXX_FLAGS) -c -I src/ $^ -o $@
 
 bin/Busca.o: src/Busca.cpp
-	$(CXX) $(CXX_FLAGS) -I src/ $^ -o $@
+	$(CXX) $(CXX_FLAGS) -c -I src/ $^ -o $@
 
 bin/teste: bin/Funcoes_auxiliares.o bin/Documento.o bin/Indice_invertido.o bin/Busca.o teste/Teste.cpp
 	$(CXX) $(CXX_FLAGS) -I include/ -I src/ $^ -o $@
 
 bin/main: bin/Funcoes_auxiliares.o bin/Documento.o bin/Indice_invertido.o bin/Busca.o src/main.cpp
-	$(CXX) $(CXX_FLAGS) $^ -o $@
+	$(CXX) $(CXX_FLAGS) -I src/ $^ -o $@

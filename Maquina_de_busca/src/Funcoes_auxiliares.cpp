@@ -1,10 +1,11 @@
 #include "Funcoes_auxiliares.h"
 #include <cmath>
-#include <unistd.h>
 #include <cstdio>
 #include <dirent.h>
+#include <experimental/filesystem>
 
 using namespace std;
+namespace fs = std::experimental::filesystem;
 
 string FuncoesAuxiliares::padronizar_string(string s){
     string novastring;
@@ -37,31 +38,26 @@ double FuncoesAuxiliares::cosseno_vetorial(vector<double> v1, vector<double> v2)
     return cos;
 }
 
-string obter_diretorio_atual(){
-    char buff[PATH_MAX];
-    getcwd(buff,PATH_MAX);
-    string diretorio_atual(buff);
-    for(int i=0;i<5;i++){
-        diretorio_atual.pop_back();
-    }
-    return diretorio_atual;
+string FuncoesAuxiliares::obter_diretorio_atual(){
+    fs::path p=fs::current_path();
+    string dir=p.string();
+    return dir;
 }
 
-vector<string> obter_arquivos_em(string diretorio){
-    DIR *dir;
-    vector<string> arquivos;
-    struct dirent *ent;
-    int contador=0;
-    if ((dir = opendir (diretorio.c_str())) != NULL) {
-        while ((ent = readdir (dir)) != NULL) {
-            if(contador<2){
-                continue;
+vector<string> FuncoesAuxiliares::obter_arquivos_em(string diretorio){
+    vector<string> resultado;
+    string path = diretorio,newpath,nome;
+    for (const auto & entry : fs::directory_iterator(path)){
+        for(auto it=entry.path().string().rbegin();it!=entry.path().string().rend();it++){
+            if(*it=='/'||*it=='\\'){
+                break;
             }
-            string s(ent->d_name);
-            arquivos.push_back(s);
-            contador++;
+            newpath.push_back(*it);
         }
-        closedir (dir);
+        for(auto it=newpath.rbegin();it!=newpath.rend();it++){
+            nome.push_back(*it);
+        }
+        resultado.push_back(nome);
     }
-    return arquivos;
+    return resultado;
 }

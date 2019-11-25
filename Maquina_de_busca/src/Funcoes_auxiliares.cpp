@@ -7,7 +7,7 @@
 using std::iostream;
 using std::string;
 using std::vector;
-using std::algorithm;
+using std::sort;
 
 string FuncoesAuxiliares::padronizar_string(string s){
     string novastring;
@@ -52,7 +52,6 @@ vector<string> FuncoesAuxiliares::obter_arquivos_em(string diretorio){
     for (const auto & entry : ghc::filesystem::directory_iterator(path)){
         for(auto it=entry.path().string().rbegin();it!=entry.path().string().rend();it++){
             if(*it=='/'||*it=='\\'){
-                newpath.clear();
                 break;
             }
             newpath.push_back(*it);
@@ -61,7 +60,8 @@ vector<string> FuncoesAuxiliares::obter_arquivos_em(string diretorio){
             nome.push_back(*it);
         }
         resultado.push_back(nome);
-        sort(resultado.begin(),resultado.end());
+        newpath.clear();
     }
+    sort(resultado.begin(),resultado.end());
     return resultado;
 }

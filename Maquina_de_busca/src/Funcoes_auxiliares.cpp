@@ -8,6 +8,7 @@ using std::iostream;
 using std::string;
 using std::vector;
 using std::sort;
+using std::reverse;
 
 string FuncoesAuxiliares::padronizar_string(string s){
     string novastring;
@@ -56,10 +57,8 @@ vector<string> FuncoesAuxiliares::obter_arquivos_em(string diretorio){
             }
             newpath.push_back(*it);
         }
-        for(auto it=newpath.rbegin();it!=newpath.rend();it++){
-            nome.push_back(*it);
-        }
-        resultado.push_back(nome);
+        reverse(newpath.begin(),newpath.end());
+        resultado.push_back(newpath);
         newpath.clear();
     }
     sort(resultado.begin(),resultado.end());

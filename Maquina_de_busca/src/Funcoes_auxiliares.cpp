@@ -5,7 +5,6 @@
 #include <experimental/filesystem>
 
 using namespace std;
-namespace fs = std::experimental::filesystem;
 
 string FuncoesAuxiliares::padronizar_string(string s){
     string novastring;
@@ -39,7 +38,7 @@ double FuncoesAuxiliares::cosseno_vetorial(vector<double> v1, vector<double> v2)
 }
 
 string FuncoesAuxiliares::obter_diretorio_atual(){
-    fs::path p=fs::current_path();
+    fs::path p=std::experimental::filesystem::current_path();
     string dir=p.string();
     return dir;
 }
@@ -47,7 +46,7 @@ string FuncoesAuxiliares::obter_diretorio_atual(){
 vector<string> FuncoesAuxiliares::obter_arquivos_em(string diretorio){
     vector<string> resultado;
     string path = diretorio,newpath,nome;
-    for (const auto & entry : fs::directory_iterator(path)){
+    for (const auto & entry : std::experimental::filesystem::directory_iterator(path)){
         for(auto it=entry.path().string().rbegin();it!=entry.path().string().rend();it++){
             if(*it=='/'||*it=='\\'){
                 break;

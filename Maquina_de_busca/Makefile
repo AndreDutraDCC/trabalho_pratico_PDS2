@@ -16,7 +16,7 @@ teste: bin/teste
 	./bin/teste
 
 bin/Funcoes_auxiliares.o: src/Funcoes_auxiliares.cpp
-	$(CXX) $(CXX_FLAGS) -c -I src/ $^ -o $@
+	$(CXX) $(CXX_FLAGS) -c -I src/ -I include/ $^ -o $@
 
 bin/Documento.o: src/Documento.cpp
 	$(CXX) $(CXX_FLAGS) -c -I src/ $^ -o $@
